@@ -1,0 +1,6 @@
+{
+   "driver_CustomTreadmill" : {
+      "enable" : true,
+      "mycontroller_model_number" : "CustomTreadmillDevice"
+   }
+}

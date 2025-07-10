@@ -1,0 +1,24 @@
+{
+	"jsonid": "input_profile",
+	"controller_type": "treadmill",
+	"input_bindingui_mode": "single_device",
+	"input_source": {
+		"/input/a": {
+			"binding_image_point": [ 80, 60 ],
+			"type": "button",
+			"touch": true,
+			"order": 1
+		},
+		"/input/trigger": {
+			"binding_image_point": [ 250, 60 ],
+			"type": "trigger",
+			"order": 2
+		},
+		"/output/haptic": {
+			"binding_image_point": [ 300, 150 ],
+			"type": "vibration",
+			"order": 4
+		}
+	},
+	"default_bindings": []
+}
