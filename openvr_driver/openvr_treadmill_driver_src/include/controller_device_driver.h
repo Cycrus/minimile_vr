@@ -2,10 +2,11 @@
 
 #include <array>
 #include <string>
-
-#include "openvr_driver.h"
 #include <atomic>
 #include <thread>
+
+#include "openvr_driver.h"
+#include "treadmill_capture.h"
 
 enum TreadmillComponents
 {
@@ -55,4 +56,6 @@ private:
 	std::array< vr::VRInputComponentHandle_t, TreadmillComponents::MAX > input_handles_;
 
 	std::atomic< bool > is_active_;
+
+	TreadmillCapture treadmill_device_;
 };
