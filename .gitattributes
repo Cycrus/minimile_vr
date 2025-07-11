@@ -1,2 +1,2 @@
 # Mark all .gscript files as generated
-*.gscript linguist-generated
+*.gcode linguist-generated
