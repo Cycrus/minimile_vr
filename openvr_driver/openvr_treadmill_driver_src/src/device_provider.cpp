@@ -39,16 +39,6 @@ void MyDeviceProvider::RunFrame()
 	{
 		this->treadmill_device_->RunTreadmillFrame();
 	}
-
-	//Now, process events that were submitted for this frame.
-	vr::VREvent_t vrevent{};
-	while ( vr::VRServerDriverHost()->PollNextEvent( &vrevent, sizeof( vr::VREvent_t ) ) )
-	{
-		if (this->treadmill_device_ != nullptr)
-		{
-			this->treadmill_device_->ProcessTreadmillEvent(vrevent);
-		}
-	}
 }
 
 void MyDeviceProvider::EnterStandby()
@@ -61,5 +51,6 @@ void MyDeviceProvider::LeaveStandby()
 
 void MyDeviceProvider::Cleanup()
 {
+	this->treadmill_device_->Deactivate();
 	this->treadmill_device_ = nullptr;
 }

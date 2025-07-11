@@ -23,6 +23,16 @@ void TreadmillCapture::StopBackgroundCapture()
     this->CloseDevice();
 }
 
+bool TreadmillCapture::isActive()
+{
+    return this->active_;
+}
+
+bool TreadmillCapture::isConnected()
+{
+    return this->is_connected_;
+}
+
 std::wstring TreadmillCapture::FindSerialPort(std::wstring device_substring)
 {
     HDEVINFO deviceInfoSet = SetupDiGetClassDevs(&GUID_DEVCLASS_PORTS, nullptr, nullptr, DIGCF_PRESENT);

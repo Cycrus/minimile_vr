@@ -1,24 +1,31 @@
 {
 	"jsonid": "input_profile",
 	"controller_type": "treadmill",
+	"legacy_binding" : "{CustomTreadmill}/input/legacy_bindings.json",
+ 	"device_class" : "TrackedDeviceClass_Controller",
 	"input_bindingui_mode": "single_device",
+	"input_bindingui_right" : {
+      "image" : "{CustomTreadmill}/icons/treadmill_icon.svg"
+   },
 	"input_source": {
-		"/input/a": {
-			"binding_image_point": [ 80, 60 ],
-			"type": "button",
-			"touch": true,
-			"order": 1
-		},
 		"/input/trigger": {
-			"binding_image_point": [ 250, 60 ],
+			"binding_image_point": [ 0, 60 ],
 			"type": "trigger",
-			"order": 2
+			"click": false,
+      		"touch": false
 		},
-		"/output/haptic": {
-			"binding_image_point": [ 300, 150 ],
-			"type": "vibration",
-			"order": 4
+		"/input/trackpad": {
+			"binding_image_point": [ 80, 60 ],
+			"type": "trackpad",
+			"click": false,
+      		"touch": false
+		},
+		"/input/joystick": {
+			"binding_image_point": [ 250, 60 ],
+			"type": "joystick",
+			"force": false,
+			"click": false,
+      		"touch": false
 		}
-	},
-	"default_bindings": []
+	}
 }

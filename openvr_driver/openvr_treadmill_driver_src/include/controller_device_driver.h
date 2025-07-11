@@ -10,14 +10,11 @@
 
 enum TreadmillComponents
 {
-	a_touch,
-	a_click,
-
-	trigger_value,
-	trigger_click,
-
-	haptic,
-
+	TRIGGER_VALUE,
+	TRACKPAD_Y,
+	JOYSTICK_Y,
+	TRACKPAD_X,
+	JOYSTICK_X,
 	MAX
 };
 

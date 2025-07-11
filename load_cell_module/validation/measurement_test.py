@@ -7,7 +7,7 @@ import serial
 import time
 
 if __name__ == "__main__":
-    ser = serial.Serial("/dev/ttyACM0", 9600, timeout=1)
+    ser = serial.Serial("COM3", 9600, timeout=1)
     filename = "load_cell_data.csv"
 
     with open(filename, "w") as file:

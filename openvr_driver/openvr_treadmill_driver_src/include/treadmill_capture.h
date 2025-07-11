@@ -16,6 +16,8 @@ public:
     void StopBackgroundCapture();
 
     float GetTreadmillValue();
+    bool isActive();
+    bool isConnected();
 
 private:
     HANDLE serial_handle_ = INVALID_HANDLE_VALUE;
