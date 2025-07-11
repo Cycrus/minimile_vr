@@ -2,6 +2,7 @@
 
 #include "driverlog.h"
 #include "vrmath.h"
+#include "utils.h"
 
 // Let's create some variables for strings used in getting settings.
 // "<my_driver>_<section>"
@@ -31,6 +32,8 @@ vr::EVRInitError TreadmillDeviceDriver::Activate( uint32_t unObjectId )
 {
 	is_active_ = true;
 	my_controller_index_ = unObjectId;
+
+	this->treadmill_device_.StartBackgroundCapture();
 
 	// Properties are stored in containers, usually one container per device index.
 	vr::PropertyContainerHandle_t container = vr::VRProperties()->TrackedDeviceToPropertyContainer(my_controller_index_);
@@ -109,18 +112,8 @@ vr::DriverPose_t TreadmillDeviceDriver::GetPose()
 	pose.vecPosition[ 1 ] = position.v[ 1 ];
 	pose.vecPosition[ 2 ] = position.v[ 2 ];
 
-	// The pose we provided is valid.
-	// This should be set is
 	pose.poseIsValid = true;
-
-	// Our device is always connected.
-	// In reality with physical devices, when they get disconnected,
-	// set this to false and icons in SteamVR will be updated to show the device is disconnected
 	pose.deviceIsConnected = true;
-
-	// The state of our tracking. For our virtual device, it's always going to be ok,
-	// but this can get set differently to inform the runtime about the state of the device's tracking
-	// and update the icons to inform the user accordingly.
 	pose.result = vr::TrackingResult_Running_OK;
 
 	return pose;
@@ -134,10 +127,15 @@ void TreadmillDeviceDriver::Deactivate()
 {
 	// unassign our controller index (we don't want to be calling vrserver anymore after Deactivate() has been called
 	my_controller_index_ = vr::k_unTrackedDeviceIndexInvalid;
+
+	this->treadmill_device_.StopBackgroundCapture();
 }
 
 void TreadmillDeviceDriver::RunTreadmillFrame()
 {
+	float treadmill_value = this->treadmill_device_.GetTreadmillValue();
+	DriverLog(std::to_string(treadmill_value).c_str());
+
 	// Update our inputs here. For actual inputs coming from hardware, these will probably be read in a separate thread.
 	vr::VRDriverInput()->UpdateBooleanComponent( input_handles_[TreadmillComponents::a_click], false, 0 );
 	vr::VRDriverInput()->UpdateBooleanComponent( input_handles_[TreadmillComponents::a_touch], false, 0 );

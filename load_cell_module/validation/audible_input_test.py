@@ -32,7 +32,7 @@ if __name__ == "__main__":
                 print(value)
                 play_sound(value)
     except KeyboardInterrupt:
-        print("\Live input preview stopped.")
+        print("Live input preview stopped.")
     finally:
         ser.close()
 

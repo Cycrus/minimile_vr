@@ -12,25 +12,32 @@ public:
     TreadmillCapture() = default;
     ~TreadmillCapture() = default;
 
-    std::string FindSerialPort();
-    int OpenDevice(std::string com_port, DWORD baud_rate);
-    void StartUpdateLoop();
-    void StopUpdateLoop();
-    int CloseDevice();
+    void StartBackgroundCapture();
+    void StopBackgroundCapture();
+
+    float GetTreadmillValue();
 
 private:
     HANDLE serial_handle_;
-    std::string com_port_;
+    std::wstring com_port_;
     DWORD errors_;
     COMSTAT status_;
-    char buffer_[256] = { 0 };
+
+    std::thread update_loop_thread_;
     std::mutex serial_lock_;
     std::mutex value_lock_;
-    float treadmill_value_ = 0.0f;
-    std::thread update_loop_thread_;
-    bool active_ = false;
 
-    std::wstring StrToWstr(std::string raw_str);
+    bool active_ = false;
+    bool is_connected_ = false;
+    char buffer_[256] = { 0 };
+    float treadmill_value_ = 0.0f;
+
+    std::wstring FindSerialPort(std::wstring device_substring);
+    static std::wstring ExtractSerialPortFromName(std::wstring serial_name);
+    int OpenDevice(std::wstring com_port, DWORD baud_rate);
+    int StartUpdateLoop();
+    int StopUpdateLoop();
+    int CloseDevice();
     float ReadValue();
     void UpdateValueLoop();
 };
