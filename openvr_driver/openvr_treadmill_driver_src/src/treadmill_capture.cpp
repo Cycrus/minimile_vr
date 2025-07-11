@@ -78,6 +78,13 @@ int TreadmillCapture::OpenDevice(std::wstring com_port, DWORD baud_rate)
 	this->com_port_ = com_port;
 	this->serial_handle_ = CreateFile(com_port.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 
+    if (this->serial_handle_ == INVALID_HANDLE_VALUE)
+    {
+        DriverLog("Failed to open serial port");
+        this->is_connected_ = false;
+        return -1;
+    }
+
     // Config serial port parameter
     DCB serialParams = { 0 };
     serialParams.DCBlength = sizeof(serialParams);
@@ -141,6 +148,8 @@ float TreadmillCapture::ReadValue()
         }
     }
 
+    //DriverLog(this->buffer_);
+
     if (!error)
     {
         try
@@ -159,6 +168,8 @@ float TreadmillCapture::ReadValue()
 
 void TreadmillCapture::UpdateValueLoop()
 {
+    const int MAX_ERRORS_ALLOWED = 10;
+    static int i = 0;
     while (this->active_)
     {
         float tmp_value = this->ReadValue();
@@ -170,13 +181,28 @@ void TreadmillCapture::UpdateValueLoop()
         this->value_lock_.unlock();
 
         if (error)
+            i++;
+        else
+            i = 0;
+
+        // This error counter conceptually is a little fragile, but empirically it is very robust.
+        // It is needed to not overinterpret every single issue as a connection loss and reconnect every time.
+        // This would lead to constant error and reconnection loops, because the serial device in the beginning
+        // always timeouts a few times before being stable.
+        if (i > MAX_ERRORS_ALLOWED)
         {
+            i = 0;
             this->CloseDevice();
             std::wstring device = this->FindSerialPort(L"Arduino");
             DriverLog("Found Device: (below)");
             DriverLog(WstrToStr(device).c_str());
+            Sleep(1000);
             this->OpenDevice(device, 9600);
-            Sleep(2000);
+            PurgeComm(this->serial_handle_, PURGE_RXCLEAR | PURGE_TXCLEAR);
+            Sleep(500);
+            EscapeCommFunction(this->serial_handle_, SETDTR);
+            EscapeCommFunction(this->serial_handle_, SETRTS);
+            Sleep(500);
         }
     }
 }
@@ -201,7 +227,11 @@ int TreadmillCapture::StopUpdateLoop()
 int TreadmillCapture::CloseDevice()
 {
     std::lock_guard<std::mutex> lock(this->serial_lock_);
-    CloseHandle(this->serial_handle_);
+    if (this->serial_handle_ != INVALID_HANDLE_VALUE)
+    {
+        CloseHandle(this->serial_handle_);
+        this->serial_handle_ = INVALID_HANDLE_VALUE;
+    }
     this->is_connected_ = false;
     return 0;
 }

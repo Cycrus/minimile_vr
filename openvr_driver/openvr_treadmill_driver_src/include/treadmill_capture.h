@@ -18,8 +18,8 @@ public:
     float GetTreadmillValue();
 
 private:
-    HANDLE serial_handle_;
-    std::wstring com_port_;
+    HANDLE serial_handle_ = INVALID_HANDLE_VALUE;
+    std::wstring com_port_ = L"";
     DWORD errors_;
     COMSTAT status_;
 
