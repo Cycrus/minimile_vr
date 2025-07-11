@@ -1,9 +1,23 @@
-# MiniMile VR
+<div align="center">
+  <img src="docs/minimile_logo.png" alt="MiniMile VR Logo" width="250">
+  <h1>MiniMile VR</h1>
+  <h2>A Minimal, low-cost VR treadmill sytem
+</div>
+
+<div align="center">
+  <img alt="License" src=https://img.shields.io/badge/License-MIT-green?style=flat-square>
+  <img alt="OS" src=https://img.shields.io/badge/OS-Windows-yellow?style=flat-square>
+  <img alt="Platforms" src=https://img.shields.io/badge/Platforms-x86__64-blue?style=flat-square>
+  <img alt="Languages" src=https://img.shields.io/badge/Languages-C++-red?style=flat-square>
+</div>
+
 
 ## What is MiniMile VR?
 MiniMile VR is an answer to the call for more affordable immersion enhancing VR devices. It is a minimal, low-cost VR treadmill system, which allows for more immersive smooth movement in Steam VR applications than a controller can provide.
 
 You can mount the system to a wall or another sturdy part of your playspace. A rubber rope then connects your waist with the mounting point holding you approximately in space, while a sensor measures how much force you use to walk or run away from the mounting point. In addition to a slippery floor (or simply with wearing wool socks) the setup offers a rather immersive walking/running experience.
+
+The system currently works unidirectional in the forward direction. In the current version, there is no directional information implemented (left, right motion).
 
 MiniMile VR is currently under active development.
 
