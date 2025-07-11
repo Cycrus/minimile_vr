@@ -1,2 +1,55 @@
-# vr_treadmill
-Everything required for a simple DIY VR treadmill, which consists of a single load cell which regulates the forward movement speed.
+# MiniMile VR
+
+## What is MiniMile VR?
+MiniMile VR is an answer to the call for more affordable immersion enhancing VR devices. It is a minimal, low-cost VR treadmill system, which allows for more immersive smooth movement in Steam VR applications than a controller can provide.
+
+You can mount the system to a wall or another sturdy part of your playspace. A rubber rope then connects your waist with the mounting point holding you approximately in space, while a sensor measures how much force you use to walk or run away from the mounting point. In addition to a slippery floor (or simply with wearing wool socks) the setup offers a rather immersive walking/running experience.
+
+MiniMile VR is currently under active development.
+
+## Installation
+Installation requires setting up the driver software on your PC and setting up the hardware.
+
+### Installing OpenVR Driver
+The OpenVR driver is required for SteamVR to detect the device as an input option for VR games. Simply double click the file "install_driver.bat" in the folder "openvr_driver". It just takes an instant and the driver is installed.
+
+If you want to uninstall the driver, there is a file named "uninstall_driver.bat" in the same folder.
+
+### Setting Up the Hardware
+The more involved step is building the hardware of the system. You will need the following components. The links are links of the products I used for my own design.
+
+- [50 kg load cell](https://www.amazon.de/dp/B077YLHG9D) (S-shape to measure pull forces, not push)
+- Arduino (any type will do; I used an Arduino Nano Every) - For measuring the movement forces - Sends the load cell output to the PC
+- [HX711 load cell module](https://www.amazon.de/dp/B0DJX8BPQL) - Required to read out the load cell
+- [Tensioning belt](https://www.amazon.de/dp/B0DRNBRWLL) - Keeps you briefly in place while moving
+
+For my design I used 2 M12 eyebolts and 2 carabiners to hang the load cell between my desk and the tensioning belt. I then knotted together the other end of the belt with some terry cloth to create a soft belt around my hip.
+
+Now you need to wire the electrical components together as in the following image.
+![Wiring Diagram](load_cell_module/schematic/treadmill_wiring.png)
+- Red wire: E+
+- Black wire: E-
+- Yellow wire: GND
+- Green wire: S+/A+
+- White wire: S-/A-
+
+The HX711 then needs to be supplied with 5V from the Arduino. Connect its CLK (yellow) with D3 and its Data Out (green) with S4.
+
+I used a 20VDC load cell to connect to my 5V excitation supply, wich worked perfectly fine.
+
+After wiring everything, connect the Arduino to your PC with an USB cable. Now you need to upload the Arduino sketch "load_cell_module/load_cell_module.ino" to the Arduino. I suggest you use the official [Arduino IDE](https://www.arduino.cc/en/software/) for that. Compilation requires the HX711 Arduino library by Rob Tillaart.
+
+Additionally, the path "load_cell_module\case contains" std and sliced gcode filed to print a small case for the controllers. The lid of the case con be placed with double sided tape.
+
+## Project Structure (Folders)
+    - load_cell_module: Contains everything regarding hardware.
+      - case: Files for printing the case for the Arduino Nano and teh HX711 module
+      - schematic: The wiring diagram
+      - validation: Some Python scripts for validating the treadmill device
+    - openvr_driver: Contains everything regarding the driver software.
+      - CustomTreadmillDriver: The driver in its release shape
+      - openvr_treadmill_driver_src: The source code of the treadmill driver
+
+## References
+    - OpenVR SteamVR driver documentation - https://github.com/ValveSoftware/openvr/wiki/Driver-Documentation
+    - Finallyfunctionals OpenVR driver example - https://github.com/finallyfunctional/openvr-driver-example/tree/main

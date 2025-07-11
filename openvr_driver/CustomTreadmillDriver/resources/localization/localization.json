@@ -1,7 +1,7 @@
 [
   {
     "language_tag": "en_US",
-    "mycontroller" : "My Sample Driver Controller",
+    "mycontroller" : "MiniMile treadmill driver.",
 
     "/input/a" : "A button",
     "/input/trigger": "Trigger"
