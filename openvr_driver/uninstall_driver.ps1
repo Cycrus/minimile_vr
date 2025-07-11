@@ -1,3 +1,8 @@
+#
+# Uninstalls the VR treadmill driver.
+# Should be called with uninstall_driver.bat.
+#
+
 Write-Output "----- Removing CustomTreadmillDriver from SteamVR Registry -----"
 
 $DRIVER_PATH = Join-Path $PSScriptRoot "CustomTreadmillDriver"

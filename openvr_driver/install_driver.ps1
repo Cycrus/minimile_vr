@@ -1,3 +1,8 @@
+#
+# Installs the VR treadmill driver.
+# Should be called with install_driver.bat.
+#
+
 Write-Output "----- Adding CustomTreadmillDriver to SteamVR Registry -----"
 
 $DRIVER_PATH = Join-Path $PSScriptRoot "CustomTreadmillDriver"
