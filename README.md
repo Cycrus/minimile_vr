@@ -1,7 +1,7 @@
 <div align="center">
   <img src="docs/minimile_logo.png" alt="MiniMile VR Logo" width="250">
   <h1>MiniMile VR</h1>
-  <h2>A Minimal, low-cost VR treadmill sytem
+  <h2>A Minimal, low-cost DIY VR treadmill sytem
 </div>
 
 <div align="center">
@@ -37,10 +37,16 @@ The more involved step is building the hardware of the system. You will need the
 - [HX711 load cell module](https://www.amazon.de/dp/B0DJX8BPQL) - Required to read out the load cell
 - [Tensioning belt](https://www.amazon.de/dp/B0DRNBRWLL) - Keeps you briefly in place while moving
 
+<div align="center">
+  <img src="docs/hardware_setup.jpg" alt="Hardware Setup">
+</div>
+
 For my design I used 2 M12 eyebolts and 2 carabiners to hang the load cell between my desk and the tensioning belt. I then knotted together the other end of the belt with some terry cloth to create a soft belt around my hip.
 
 Now you need to wire the electrical components together as in the following image.
-![Wiring Diagram](load_cell_module/schematic/treadmill_wiring.png)
+<div align="center">
+  <img src="load_cell_module/schematic/treadmill_wiring.png" alt="Wiring">
+</div>
 - Red wire: E+
 - Black wire: E-
 - Yellow wire: GND
@@ -65,5 +71,5 @@ Additionally, the path "load_cell_module\case contains" std and sliced gcode fil
       - openvr_treadmill_driver_src: The source code of the treadmill driver
 
 ## References
-    - OpenVR SteamVR driver documentation - https://github.com/ValveSoftware/openvr/wiki/Driver-Documentation
-    - Finallyfunctionals OpenVR driver example - https://github.com/finallyfunctional/openvr-driver-example/tree/main
+  - OpenVR SteamVR driver documentation - https://github.com/ValveSoftware/openvr/wiki/Driver-Documentation
+  - Finallyfunctionals OpenVR driver example - https://github.com/finallyfunctional/openvr-driver-example/tree/main
