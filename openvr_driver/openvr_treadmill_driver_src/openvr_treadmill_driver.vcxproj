@@ -39,7 +39,6 @@
     <ClInclude Include="include\openvr_driver.h" />
     <ClInclude Include="include\treadmill_capture.h" />
     <ClInclude Include="include\utils.h" />
-    <ClInclude Include="include\vrmath.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

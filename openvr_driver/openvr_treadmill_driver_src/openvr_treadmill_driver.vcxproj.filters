@@ -58,9 +58,6 @@
     <ClInclude Include="include\openvr_driver.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\vrmath.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="include\device_provider.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>

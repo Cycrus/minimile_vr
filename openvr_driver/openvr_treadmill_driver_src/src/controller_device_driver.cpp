@@ -1,16 +1,14 @@
 #include "controller_device_driver.h"
 
 #include "driverlog.h"
-#include "vrmath.h"
 #include "utils.h"
 
 // Let's create some variables for strings used in getting settings.
 // "<my_driver>_<section>"
-static const char* my_controller_main_settings_section = "driver_CustomTreadmill";
+static const char* treadmill_main_settings_section = "driver_CustomTreadmill";
 
 // These are the keys we want to retrieve the values for in the settings
-static const char *my_controller_settings_key_model_number = "mycontroller_model_number";
-static const char *my_controller_settings_key_serial_number = "mycontroller_serial_number";
+static const char *treadmill_settings_key_model_number = "mycontroller_model_number";
 
 
 TreadmillDeviceDriver::TreadmillDeviceDriver( vr::ETrackedControllerRole role )
@@ -20,24 +18,22 @@ TreadmillDeviceDriver::TreadmillDeviceDriver( vr::ETrackedControllerRole role )
 
 	// We have our model number and serial number stored in SteamVR settings. We need to get them and do so here.
 	char model_number[ 1024 ];
-	vr::VRSettings()->GetString( my_controller_main_settings_section, my_controller_settings_key_model_number, model_number, sizeof( model_number ) );
-	model_number_ = model_number;
+	vr::VRSettings()->GetString(treadmill_main_settings_section, treadmill_settings_key_model_number, model_number, sizeof( model_number ) );
 	serial_number_ = model_number;
 
-	DriverLog( "My Controller Model Number: %s", model_number_.c_str() );
-	DriverLog( "My Controller Serial Number: %s", serial_number_.c_str() );
+	DriverLog( "Treadmill Serial Number: %s", serial_number_.c_str() );
 }
 
 vr::EVRInitError TreadmillDeviceDriver::Activate( uint32_t unObjectId )
 {
 	is_active_ = true;
-	my_controller_index_ = unObjectId;
+	controller_index_ = unObjectId;
 
 	this->treadmill_device_.StartBackgroundCapture();
 
-	vr::PropertyContainerHandle_t container = vr::VRProperties()->TrackedDeviceToPropertyContainer(my_controller_index_);
+	vr::PropertyContainerHandle_t container = vr::VRProperties()->TrackedDeviceToPropertyContainer(controller_index_);
 
-	vr::VRProperties()->SetStringProperty(container, vr::Prop_ModelNumber_String, model_number_.c_str());
+	vr::VRProperties()->SetStringProperty(container, vr::Prop_ModelNumber_String, serial_number_.c_str());
 	vr::VRProperties()->SetInt32Property(container, vr::Prop_ControllerRoleHint_Int32, treadmill_role_);
 	vr::VRProperties()->SetStringProperty(container, vr::Prop_InputProfilePath_String, "{CustomTreadmill}/input/mycontroller_profile.json");
 
@@ -89,7 +85,7 @@ void TreadmillDeviceDriver::EnterStandby()
 void TreadmillDeviceDriver::Deactivate()
 { 
 	// unassign our controller index (we don't want to be calling vrserver anymore after Deactivate() has been called
-	my_controller_index_ = vr::k_unTrackedDeviceIndexInvalid;
+	controller_index_ = vr::k_unTrackedDeviceIndexInvalid;
 
 	this->treadmill_device_.StopBackgroundCapture();
 }
@@ -109,7 +105,7 @@ void TreadmillDeviceDriver::ProcessTreadmillEvent( const vr::VREvent_t &vrevent 
 {
 }
 
-const std::string & TreadmillDeviceDriver::MyGetSerialNumber()
+const std::string & TreadmillDeviceDriver::GetSerialNumber()
 {
 	return serial_number_;
 }

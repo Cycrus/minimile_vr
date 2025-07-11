@@ -11,7 +11,7 @@ vr::EVRInitError MyDeviceProvider::Init( vr::IVRDriverContext *pDriverContext )
 	treadmill_device_ = std::make_unique< TreadmillDeviceDriver >(vr::TrackedControllerRole_Treadmill);
 
 	// Now we need to tell vrserver about our controllers.
-	if ( !vr::VRServerDriverHost()->TrackedDeviceAdded(treadmill_device_->MyGetSerialNumber().c_str(), vr::TrackedDeviceClass_Controller, treadmill_device_.get() ) )
+	if ( !vr::VRServerDriverHost()->TrackedDeviceAdded(treadmill_device_->GetSerialNumber().c_str(), vr::TrackedDeviceClass_Controller, treadmill_device_.get() ) )
 	{
 		DriverLog( "Failed to create treadmill device!" );
 		return vr::VRInitError_Driver_Unknown;
