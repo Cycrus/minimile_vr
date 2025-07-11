@@ -44,9 +44,11 @@ The more involved step is building the hardware of the system. You will need the
 For my design I used 2 M12 eyebolts and 2 carabiners to hang the load cell between my desk and the tensioning belt. I then knotted together the other end of the belt with some terry cloth to create a soft belt around my hip.
 
 Now you need to wire the electrical components together as in the following image.
+
 <div align="center">
-  <img src="load_cell_module/schematic/treadmill_wiring.png" alt="Wiring">
+  <img src="docs/treadmill_wiring.png" alt="Wiring" width="600">
 </div>
+
 - Red wire: E+
 - Black wire: E-
 - Yellow wire: GND
@@ -62,9 +64,9 @@ After wiring everything, connect the Arduino to your PC with an USB cable. Now y
 Additionally, the path "load_cell_module\case contains" std and sliced gcode filed to print a small case for the controllers. The lid of the case con be placed with double sided tape.
 
 ## Project Structure (Folders)
+    - docs: Images of the project setup, wiring, etc.
     - load_cell_module: Contains everything regarding hardware.
       - case: Files for printing the case for the Arduino Nano and teh HX711 module
-      - schematic: The wiring diagram
       - validation: Some Python scripts for validating the treadmill device
     - openvr_driver: Contains everything regarding the driver software.
       - CustomTreadmillDriver: The driver in its release shape
