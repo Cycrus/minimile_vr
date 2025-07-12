@@ -63,6 +63,6 @@ void loop()
   to too much latency for a useful game input device.
   */
   // float smoothed_value = ema_measurement(raw_value, 0.07);
-  float normalized_value = normalize_measurement(raw_value, 50000.0, 1000000.0);
+  float normalized_value = normalize_measurement(raw_value, 100000.0, 800000.0);
   Serial.println(normalized_value);
 }
