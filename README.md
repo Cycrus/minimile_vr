@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="docs/minimile_logo.png" alt="MiniMile VR Logo" width="250">
-  <h1>MiniMile VR</h1>
+  <img src="docs/minimile_logo.png" alt="SlimStep VR Logo" width="250">
+  <h1>SlimStep VR</h1>
   <h2>A Minimal, low-cost DIY VR treadmill system</h2>
 </div>
 
@@ -12,14 +12,14 @@
 </div>
 
 
-## What is MiniMile VR?
-MiniMile VR is an answer to the demand for more affordable immersion enhancing VR devices. It is a minimal, low-cost VR treadmill system, which allows for more immersive smooth movement in Steam VR applications than a controller can provide.
+## What is SlimStep VR?
+SlimStep VR is an answer to the demand for more affordable immersion enhancing VR devices. It is a minimal, low-cost VR treadmill system, which allows for more immersive smooth movement in Steam VR applications than a controller can provide.
 
 You can mount the system to a wall or another sturdy part of your playspace. A rubber rope then connects your waist with the mounting point holding you approximately in space, while a sensor measures how much force you use to walk or run away from the mounting point. In addition to a slippery floor - or simply with wearing wool socks - the setup offers a rather immersive walking/running experience.
 
 The system currently works unidirectional in the forward direction. In the current version there is no directional information implemented (left or right motion).
 
-MiniMile VR is currently under active development.
+SlimStep VR is currently under active development.
 
 ## Installation
 Installation requires setting up the driver software on your PC and setting up the hardware.
